@@ -3,7 +3,7 @@
 My projects on Solana Blockchain Developer Bootcamp - https://chain.link/bootcamp/solana-2022
 
 - [gm-program](/gm-program)
-- [gm-program2](/gm-program2)
+- [token-program](/token-program)
 
 ## References
 ### Day 1
