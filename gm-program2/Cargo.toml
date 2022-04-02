@@ -1,5 +1,5 @@
 [package]
-name = "gm-program"
+name = "gm-program2"
 version = "0.1.0"
 edition = "2021"
 
@@ -18,5 +18,5 @@ solana-program-test = "=1.7.9"
 solana-sdk = "=1.7.9"
 
 [lib]
-name = "gm_program"
+name = "gm_program2"
 crate-type = ["cdylib", "lib"]

@@ -45,15 +45,16 @@ const PROGRAM_PATH = path.resolve(__dirname, "../dist/program");
  *   - `npm run build:program-c`
  *   - `npm run build:program-rust`
  */
-const PROGRAM_SO_PATH = path.join(PROGRAM_PATH, "gm_program.so");
+const PROGRAM_SO_PATH = path.join(PROGRAM_PATH, "gm_program2.so");
 
 /**
  * Path to the keypair of the deployed program.
  * This file is created when running `solana program deploy dist/program/gm_program.so`
  */
-const PROGRAM_KEYPAIR_PATH = path.join(PROGRAM_PATH, "gm_program-keypair.json");
+const PROGRAM_KEYPAIR_PATH = path.join(PROGRAM_PATH, "gm_program2-keypair.json");
 
 const NAME_FOR_GM = "Chuck Norris";
+const INIT_COUNTER = 0;
 
 /**
  * Borsh class and schema definition for greeting accounts
@@ -61,9 +62,11 @@ const NAME_FOR_GM = "Chuck Norris";
 
 class GmAccount {
   name = "";
-  constructor(fields: { name: string } | undefined = undefined) {
+	counter = 0;
+  constructor(fields: { name: string, counter: number } | undefined = undefined) {
     if (fields) {
       this.name = fields.name;
+			this.counter = fields.counter;
     }
   }
   static schema = new Map([
@@ -71,7 +74,7 @@ class GmAccount {
       GmAccount,
       {
         kind: "struct",
-        fields: [["name", "string"]],
+        fields: [["name", "string"], ["counter", "u32"]],
       },
     ],
   ]);
@@ -82,7 +85,7 @@ class GmAccount {
  */
 const GREETING_SIZE = borsh.serialize(
   GmAccount.schema,
-  new GmAccount({ name: NAME_FOR_GM })
+  new GmAccount({ name: NAME_FOR_GM, counter: INIT_COUNTER })
 ).length;
 
 /**
@@ -141,6 +144,7 @@ export async function checkProgram(): Promise<void> {
     const programKeypair = await createKeypairFromFile(PROGRAM_KEYPAIR_PATH);
     programId = programKeypair.publicKey;
   } catch (err) {
+		console.error(err);
     const errMsg = (err as Error).message;
     throw new Error(
       `Failed to read program keypair at '${PROGRAM_KEYPAIR_PATH}' due to error: ${errMsg}. Program may need to be deployed with \`solana program deploy dist/program/gm_program.so\``
@@ -211,11 +215,12 @@ export async function sayGm(): Promise<void> {
 
   let gm = new GmAccount({
     name: NAME_FOR_GM,
+		counter: INIT_COUNTER
   });
 
   let data = borsh.serialize(GmAccount.schema, gm);
   const data_to_send = Buffer.from(data);
-  console.log(data_to_send);
+  console.log('data_to_send :', data_to_send.toString('utf8'));
 
   const instruction = new TransactionInstruction({
     keys: [{ pubkey: greetedPubkey, isSigner: false, isWritable: true }],
@@ -243,4 +248,5 @@ export async function reportGm(): Promise<void> {
     accountInfo.data
   );
   console.log(greetedPubkey.toBase58(), "GM was said to ", greeting.name);
+	console.log(`Total counter : ${greeting.counter}`);
 }

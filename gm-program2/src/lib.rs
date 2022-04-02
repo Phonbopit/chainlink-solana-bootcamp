@@ -34,7 +34,8 @@ pub fn process_instruction(
     }
 
     // Deserialize the input data, and store it in GreetingAccount struct.
-    let mut greeting_account = GreetingAccount::try_from_slice(&input).unwrap();
+    // let mut greeting_account = GreetingAccount::try_from_slice(&input).unwrap();
+    let mut greeting_account = GreetingAccount::try_from_slice(&account.data.borrow())?;
 
     greeting_account.counter += 1;
     msg!("GM {}", greeting_account.name);
