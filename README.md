@@ -2,10 +2,19 @@
 
 My projects on Solana Blockchain Developer Bootcamp - https://chain.link/bootcamp/solana-2022
 
+**Day 1 - Exercises**
+
 - [gm-program](/gm-program)
+- [gm-program - Bonus Exercise](/gm-program2)
 - [token-program](/token-program)
+- [token-program - Bonus Exercise](/token-program-bonus)
+
+**Day 2 - Exercises**
+
+// TBC
 
 ## References
+
 ### Day 1
 
 - [Day 1 - Presentation](https://drive.google.com/file/d/19j241YdwF1p2y6SP_S-HCdmsL7ds-kB4/view)
