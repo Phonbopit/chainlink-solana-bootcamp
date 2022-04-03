@@ -437,7 +437,7 @@ export async function createTokenAccount(tokenKey: PublicKey): Promise<void> {
 }
 
 export async function burn(): Promise<void> {
-  const BURN_AMOUNT = 100;
+  const BURN_AMOUNT = 50;
   console.log(`Burning ${BURN_AMOUNT} tokens of ${TOKEN_NAME}`);
 
   let tokenMintInstruction = new TokenInstruction({

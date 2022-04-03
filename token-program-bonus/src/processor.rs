@@ -115,10 +115,15 @@ impl Processor {
             TokenInstruction::Burn { amount } => {
                 msg!("Instruction: Burn");
 
-                let _token_account_acct = next_account_info(accounts_iter)?;
+                //get account info for master token account and token account to mint to
+                let token_account_acct = next_account_info(accounts_iter)?;
                 let token_master_account = next_account_info(accounts_iter)?;
+                let mut token_account = TokenAccount::load(token_account_acct)?;
                 let mut token = Token::load(token_master_account)?;
+
+                //basic validation, ensure its the master token authority trying to mint
                 let token_authority = next_account_info(accounts_iter)?;
+
                 if !token_authority.is_signer {
                     msg!("Only the token owner can burn tokens");
                     return Err(ProgramError::MissingRequiredSignature);
@@ -126,10 +131,12 @@ impl Processor {
 
                 // remove supply and amount.
                 token.supply -= amount;
+                token_account.amount -= amount;
 
                 msg!("Token supply : {}", token.supply);
 
                 //save updated contents of both accounts
+                token_account.save(token_account_acct)?;
                 token.save(token_master_account)?;
             }
         }
