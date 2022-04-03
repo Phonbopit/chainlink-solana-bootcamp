@@ -52,6 +52,21 @@ pub mod solana_chainlink {
             ctx.accounts.chainlink_feed.to_account_info(),
         )?;
 
+        let round2 = chainlink::latest_round_data(
+            ctx.accounts.chainlink_program.to_account_info(),
+            ctx.accounts.chainlink_feed2.to_account_info(),
+        )?;
+
+        let description2 = chainlink::description(
+            ctx.accounts.chainlink_program.to_account_info(),
+            ctx.accounts.chainlink_feed2.to_account_info(),
+        )?;
+
+        let decimals2 = chainlink::decimals(
+            ctx.accounts.chainlink_program.to_account_info(),
+            ctx.accounts.chainlink_feed2.to_account_info(),
+        )?;
+
         // Set the account value
         let decimal: &mut Account<Decimal> = &mut ctx.accounts.decimal;
         decimal.value = round.answer;
@@ -59,7 +74,23 @@ pub mod solana_chainlink {
 
         // Also print the value to the program output
         let decimal_print = Decimal::new(round.answer, u32::from(decimals));
-        msg!("{} price is {}", description, decimal_print);
+        let decimal_print2 = Decimal::new(round2.answer, u32::from(decimals2));
+        msg!("feed 1 {} price is {}", description, decimal_print);
+        msg!("feed 2 {} price is {}", description2, decimal_print2);
+
+        let new_price = round2.answer / round.answer;
+
+        msg!("new price {}", new_price);
+
+        let new_price_print = Decimal::new(new_price, u32::from(decimals2));
+
+        msg!("final price is {}", new_price_print);
+
+        // set to account for final feed/feed pair price.
+        let decimal2: &mut Account<Decimal> = &mut ctx.accounts.decimal;
+        decimal2.value = new_price;
+        decimal2.decimals = u32::from(decimals2);
+
         Ok(())
     }
 }
@@ -71,6 +102,7 @@ pub struct Execute<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
     pub chainlink_feed: AccountInfo<'info>,
+    pub chainlink_feed2: AccountInfo<'info>,
     pub chainlink_program: AccountInfo<'info>,
     #[account(address = system_program::ID)]
     pub system_program: AccountInfo<'info>,

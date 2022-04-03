@@ -16,6 +16,7 @@ const DIVISOR = 100000000;
 // Default is SOL / USD
 const default_feed = 'EdWr4ww1Dq82vPe8GFjjcVPo2Qno3Nhn6baCgM3dCy28';
 const CHAINLINK_FEED = args['feed'] || default_feed;
+const CHAINLINK_FEED_2 = args['feed2'] || default_feed;
 
 async function main() {
   // Read the generated IDL.
@@ -41,6 +42,7 @@ async function main() {
       decimal: priceFeedAccount.publicKey,
       user: provider.wallet.publicKey,
       chainlinkFeed: CHAINLINK_FEED,
+      chainlinkFeed2: CHAINLINK_FEED_2,
       chainlinkProgram: CHAINLINK_PROGRAM_ID,
       systemProgram: anchor.web3.SystemProgram.programId,
     },
