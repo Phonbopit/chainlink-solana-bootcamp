@@ -7,11 +7,16 @@ My projects on Solana Blockchain Developer Bootcamp - https://chain.link/bootcam
 - [gm-program](/gm-program)
 - [gm-program - Bonus Exercise](/gm-program2)
 - [token-program](/token-program)
-- [token-program - Bonus Exercise](/token-program-bonus)
+- [token-program - Bonus Exercise](/token-program-bonus) **Not finished yet**
 
 **Day 2 - Exercises**
 
-// TBC
+- [gm-anchor](/gm-anchor)
+- [gm-anchor - Bonus Exercise](/gm-anchor2)
+- [solana-social](/solana-social)
+- [solana-social - Bonus Exercises](/solana-social2/) **Not finished yet**
+- [solana-chainlink](/solana-chainlink/)
+- [solana-chainlink - Bonus Exercises](/solana-chainlink2/)
 
 ## References
 
@@ -86,8 +91,49 @@ yarn deploy:program
 yarn start
 ```
 
+
+### Create project with Anchor
+
+```
+anchor init gm-anchor
+```
+
+build a program
+
+```
+anchor build
+```
+
+Get program ID using following command:
+
+```
+solana address -k ./target/deploy/gm_anchor-keypair.json
+```
+
+Update `declare_id` and build again:
+
+```
+anchor build
+```
+
+then deploy a program:
+
+```
+anchor deploy
+```
+
+deploy on a testnet
+
+```
+anchor deploy --provider.cluster devnet
+```
+
+Run a client script
+
+```
+yarn start <option>
+```
+
+- See scripts in `package.json` each project for more detail.
+
 That's it! ❤️
-
-### Day 2
-
-// TBC
