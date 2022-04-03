@@ -28,3 +28,9 @@ yarn start --feed 5zxs8888az8dgB5KauGEFoPuMANtrKtkpFiFRmo3cSa9 --feed2 EdWr4ww1D
 | LINK/USD | CFRkaCg9PcuMaCZZdcePkaa8d8ugtH221HL7tXQHNVia |
 | SOL/USD | EdWr4ww1Dq82vPe8GFjjcVPo2Qno3Nhn6baCgM3dCy28 |
 
+## Anchor 
+
+```
+anchor build
+anchor deploy --provider.cluster devnet
+```

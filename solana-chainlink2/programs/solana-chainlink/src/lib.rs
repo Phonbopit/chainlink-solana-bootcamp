@@ -78,18 +78,19 @@ pub mod solana_chainlink {
         msg!("feed 1 {} price is {}", description, decimal_print);
         msg!("feed 2 {} price is {}", description2, decimal_print2);
 
-        let new_price = round2.answer / round.answer;
+        let new_price = decimal_print2.value as f64 / decimal_print.value as f64;
+
+        let pair1 = description.split("/").next();
+        let pair2 = description2.split("/").next();
 
         msg!("new price {}", new_price);
-
-        let new_price_print = Decimal::new(new_price, u32::from(decimals2));
-
-        msg!("final price is {}", new_price_print);
+        msg!("final price of {:?}/{:?} is {}", pair1, pair2, new_price);
 
         // set to account for final feed/feed pair price.
         let decimal2: &mut Account<Decimal> = &mut ctx.accounts.decimal;
-        decimal2.value = new_price;
-        decimal2.decimals = u32::from(decimals2);
+        // TODO: a bit tricky, will find the better solution later :)
+        decimal2.value = (new_price * 100000000.0) as i128;
+        decimal2.decimals = 8;
 
         Ok(())
     }
