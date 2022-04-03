@@ -1,6 +1,8 @@
 Solana Social
 ---
 
+// TODO: Bonus Exercise
+
 ## Client Usage
 
 Add a content
