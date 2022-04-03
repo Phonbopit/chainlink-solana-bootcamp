@@ -20,6 +20,11 @@ My projects on Solana Blockchain Developer Bootcamp - https://chain.link/bootcam
 - [Day 1 - Presentation](https://drive.google.com/file/d/19j241YdwF1p2y6SP_S-HCdmsL7ds-kB4/view)
 - [Solana Blockchain Developer Bootcamp Day 1 Exercises](https://docs.google.com/document/d/e/2PACX-1vSOgwdz9-vpBDwh3Epr3fdjzGyMWB1GHNT4H7YysNRyBFRJ0_qpcafgGcZUgNJLoyTH9IBVBaaInHsc/pub)
 
+### Day 2
+
+- [Day 2 - Solana Bootcamp 2022_Day 2 Weekend](https://drive.google.com/file/d/1q21-c6i_ATB4Qgtz8WIfS4lOvvC-YRvs/view)
+- [Day 2 - Solana Developer Bootcamp: Day 2 Exercises](https://docs.google.com/document/d/e/2PACX-1vTm2gQPzKGtoZtTeXJGw6ux69gKDrAtiC8qD6GqWTQwfLaokAv9nnTgnGaniHOOLTZoKosRy0FgvGVy/pub)
+
 ## Usage
 
 #### Configure Solana CLI
