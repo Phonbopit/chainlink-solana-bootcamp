@@ -7,14 +7,14 @@ My projects on Solana Blockchain Developer Bootcamp - https://chain.link/bootcam
 - [gm-program](/gm-program)
 - [gm-program - Bonus Exercise](/gm-program2)
 - [token-program](/token-program)
-- [token-program - Bonus Exercise](/token-program-bonus) **Not finished yet**
+- [token-program - Bonus Exercise](/token-program-bonus)
 
 **Day 2 - Exercises**
 
 - [gm-anchor](/gm-anchor)
 - [gm-anchor - Bonus Exercise](/gm-anchor2)
 - [solana-social](/solana-social)
-- [solana-social - Bonus Exercises](/solana-social2/) **Not finished yet**
+- [solana-social - Bonus Exercises](/solana-social2/)
 - [solana-chainlink](/solana-chainlink/)
 - [solana-chainlink - Bonus Exercises](/solana-chainlink2/)
 
