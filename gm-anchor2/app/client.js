@@ -39,6 +39,22 @@ async function main() {
   console.log(t.meta.logMessages);
   // #endregion main
 
+  let greetingTx = await program.rpc.greeting(name, {
+    accounts: {
+      greetingAccount: gmAccount.publicKey,
+      user: provider.wallet.publicKey,
+    },
+    options: { commitment: 'confirmed' },
+  });
+
+  let greetingTx2 = await program.rpc.greeting(name, {
+    accounts: {
+      greetingAccount: gmAccount.publicKey,
+      user: provider.wallet.publicKey,
+    },
+    options: { commitment: 'confirmed' },
+  });
+
   // Fetch the account details of the account containing the price data
   const storedName = await program.account.greetingAccount.fetch(
     gmAccount.publicKey

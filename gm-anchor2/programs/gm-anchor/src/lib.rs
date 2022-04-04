@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("2A12oajYPMchSX3QJ4262hLqjRHPVQcUGSMmtuZUENK4");
+declare_id!("2HZrGbQpkWmUtj4Ed2k7XeJtkb9LWsBXsADwAD8C945u");
 
 #[program]
 pub mod gm_anchor {
@@ -9,7 +9,16 @@ pub mod gm_anchor {
         let gm_account = &mut ctx.accounts.gm_account;
 
         gm_account.name = name;
+        gm_account.counter = 1;
         msg!("GM {}", gm_account.name);
+        Ok(())
+    }
+
+    pub fn greeting(ctx: Context<GreetingCount>, name: String) -> ProgramResult {
+        let gm_account: &mut Account<GreetingAccount> = &mut ctx.accounts.greeting_account;
+
+        gm_account.name = name;
+        gm_account.counter += 1;
         Ok(())
     }
 }
@@ -23,8 +32,16 @@ pub struct Execute<'info> {
     pub system_program: Program<'info, System>,
 }
 
+#[derive(Accounts)]
+pub struct GreetingCount<'info> {
+    #[account(mut)]
+    pub greeting_account: Account<'info, GreetingAccount>,
+    pub user: Signer<'info>,
+}
+
 #[account]
+#[derive(Debug)]
 pub struct GreetingAccount {
     pub name: String,
-    pub counter: u32,
+    pub counter: u64,
 }

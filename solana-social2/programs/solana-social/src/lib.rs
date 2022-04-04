@@ -55,6 +55,17 @@ pub mod solana_social {
 
         post.title = title;
         post.content = content;
+        post.timestamp = Clock::get().unwrap().unix_timestamp;
+
+        Ok(())
+    }
+
+    pub fn delete_post(ctx: Context<DeletePost>) -> ProgramResult {
+        let post: &mut Account<Post> = &mut ctx.accounts.post;
+
+        post.title = String::from("");
+        post.content = String::from("");
+        post.timestamp = Clock::get().unwrap().unix_timestamp;
 
         Ok(())
     }
@@ -72,6 +83,13 @@ pub struct CreatePost<'info> {
 
 #[derive(Accounts)]
 pub struct UpdatePost<'info> {
+    #[account(mut, has_one = author)]
+    pub post: Account<'info, Post>,
+    pub author: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct DeletePost<'info> {
     #[account(mut, has_one = author)]
     pub post: Account<'info, Post>,
     pub author: Signer<'info>,
