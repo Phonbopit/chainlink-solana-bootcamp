@@ -80,6 +80,24 @@ async function main() {
     const postData = await program.account.post.fetch(POST_ACCT);
     console.log('Title Is: ' + postData.title);
     console.log('Content Is: ' + postData.content);
+  } else if (ACTION === 'delete') {
+    //Update a post
+    tx = await program.rpc.deletePost({
+      accounts: {
+        post: POST_ACCT,
+        author: provider.wallet.publicKey,
+      },
+      options: { commitment: 'confirmed' },
+    });
+
+    console.log('Fetching transaction logs...');
+    let t = await provider.connection.getConfirmedTransaction(tx, 'confirmed');
+    console.log(t.meta.logMessages);
+
+    // Fetch the account details of the account containing the post
+    const postData = await program.account.post.fetch(POST_ACCT);
+    console.log('Title Is: ' + postData.title);
+    console.log('Content Is: ' + postData.content);
   } else {
     console.error('invalid action');
     return;
